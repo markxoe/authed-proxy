@@ -1,12 +1,14 @@
-# Authed Proxy Server
+# WIP: Authed Proxy Server
+
+**:construction: Work in progress**
 
 Just an express HTTP Proxy Server, but authed with TOTP Codes and Cookies
 
 ## Description
 
-This is an Express Server which checks for an Cookie. If it doesn't exist, it will redirect to an authentication site where the user has to enter an TOTP Token (aka 2 Factor authentication token) to get the cookie. If the Cookie then exists, it will proxy to another Server.
+This is an Express Server which checks for an cookie. If it doesn't exist, it will redirect to an authentication site where the user has to enter an TOTP token (aka 2 Factor authentication token) to get the cookie. If the cookie then exists, it will proxy to another Server.
 
-The result can be used to, for example, publish [OctoPrint](https://github.com/OctoPrint/OctoPrint) or any other serevr securely to the internet.
+The result can be used to, for example, publish [OctoPrint](https://github.com/OctoPrint/OctoPrint) or any other server securely to the public internet.
 
 ### Used Technologies
 
