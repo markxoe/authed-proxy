@@ -59,6 +59,11 @@ app.post("/proxyauth/api/setup", async (req, res) => {
   } else res.send({ status: "err", err: "Already Setup" });
 });
 
+app.get("/proxyauth/logout", (req, res) => {
+  req.session.authed = false;
+  res.redirect("/proxyauth/logout-success");
+});
+
 app.get("/proxyauth/*", (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
 });

@@ -6,6 +6,7 @@ import Menu from "./components/Menu";
 import MainPage from "./pages";
 import { LanguageProvider } from "./state";
 import SetupPage from "./pages/Setup";
+import LogoutPage from "./pages/Logout";
 
 const App = () => {
   return (
@@ -18,6 +19,9 @@ const App = () => {
           </Route>
           <Route path="/proxyauth/setup" exact>
             <SetupPage />
+          </Route>
+          <Route path="/proxyauth/logout-success" exact>
+            <LogoutPage />
           </Route>
         </Switch>
       </Router>
