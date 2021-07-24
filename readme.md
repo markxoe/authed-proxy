@@ -34,5 +34,5 @@ The result can be used to, for example, publish [OctoPrint](https://github.com/O
 
 - [ ] CI
 - [ ] Automated Tests
-- [ ] Setup Wizard
+- [ ] Setup Wizard (partially done)
 - [ ] Different Authentication Methods
