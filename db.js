@@ -10,6 +10,7 @@ const db = (directory, filename) => {
   const set = (name, data) => {
     const before = JSON.parse(fs.readFileSync(fullname).toString());
     fs.writeFileSync(fullname, JSON.stringify({ ...before, [name]: data }));
+    return data;
   };
 
   const get = (name, defaultValue = undefined) => {
@@ -17,9 +18,15 @@ const db = (directory, filename) => {
     return data[name] || defaultValue;
   };
 
+  const exists = (name) => {
+    const data = JSON.parse(fs.readFileSync(fullname).toString());
+    return data[name] != undefined;
+  };
+
   return {
     set,
     get,
+    exists,
   };
 };
 

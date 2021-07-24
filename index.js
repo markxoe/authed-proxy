@@ -18,13 +18,23 @@ const app = express();
 
 const db = require("./db")("temp", "db.json");
 
-const { PROXY_TARGET, COOKIE_SECRET } = process.env;
+const { PROXY_TARGET } = process.env;
 if (!PROXY_TARGET) throw Error("PROXY_TARGET not set");
-if (!COOKIE_SECRET) throw Error("COOKIE_SECRET not set");
 
+console.log("Printing current QR Code:");
 if (db.get("is-setup", false))
-  qr.generate(`otpauth://totp/?secret=${db.get("secret")}`, { small: true });
+  qr.generate(`otpauth://totp/HTTP Proxy?secret=${db.get("secret")}`, {
+    small: true,
+  });
 else console.log("No OTP Secret set yet");
+
+const COOKIE_SECRET = db.exists("cookie-secret")
+  ? db.get("cookie-secret")
+  : db.set(
+      "cookie-secret",
+      otblib.authenticator.generateSecret(Math.round(Math.random() * 100)) +
+        Math.round(Math.random() * 100)
+    );
 
 app.use(
   cookieSession({
