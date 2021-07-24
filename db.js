@@ -1,16 +1,19 @@
 const fs = require("fs");
+const path = require("path");
 
-const db = (filename) => {
-  if (!fs.existsSync(filename)) {
-    fs.writeFileSync(filename, JSON.stringify({}));
+const db = (directory, filename) => {
+  const fullname = path.join(directory, filename);
+  if (!fs.existsSync(fullname)) {
+    fs.mkdirSync(directory);
+    fs.writeFileSync(fullname, JSON.stringify({}));
   }
   const set = (name, data) => {
-    const before = JSON.parse(fs.readFileSync(filename).toString());
-    fs.writeFileSync(filename, JSON.stringify({ ...before, [name]: data }));
+    const before = JSON.parse(fs.readFileSync(fullname).toString());
+    fs.writeFileSync(fullname, JSON.stringify({ ...before, [name]: data }));
   };
 
   const get = (name, defaultValue = undefined) => {
-    const data = JSON.parse(fs.readFileSync(filename).toString());
+    const data = JSON.parse(fs.readFileSync(fullname).toString());
     return data[name] || defaultValue;
   };
 

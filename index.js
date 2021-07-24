@@ -16,7 +16,7 @@ const path = require("path");
 
 const app = express();
 
-const db = require("./db")("temp/db.json");
+const db = require("./db")("temp", "db.json");
 
 const { PROXY_TARGET, COOKIE_SECRET } = process.env;
 if (!PROXY_TARGET) throw Error("PROXY_TARGET not set");
