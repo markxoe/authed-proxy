@@ -31,9 +31,9 @@ const langs = {
     "source code on GitHub": "Source Code auf GitHub",
     setup: {
       "Setup One Time Password": "Richte das One Time Password ein",
-      "Show me the QR Code": "Zeig mit den QR COde!",
+      "Show me the QR Code": "Zeig mit den QR Code!",
       "Warning! You are not going to see this QR Code again!":
-        "Achtung! Den QR Code wirst du nur dieses mal sehen können",
+        "Achtung! Den QR Code kannst du nur einmal sehen!",
       here: "hier",
       "long setup msg":
         "Wenn du auf den Knopf unten klickst, wirst du einen QR Code sehen, den du mit der Google Authenticator oder einer anderen App scannen kannst. Alternativ kannst du auch den Secret Code, der dir auch angezeigt wird, in die App eingeben. Danach kannst du den Code aus der App in das Feld eingeben und zum Proxy gelangen",

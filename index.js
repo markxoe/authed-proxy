@@ -1,24 +1,20 @@
 // @ts-check
 require("dotenv").config();
+const path = require("path");
 
 const express = require("express");
-const proxyMiddleware = require("http-proxy-middleware");
-const cookieSession = require("cookie-session");
 const bodyparser = require("body-parser");
+const cookieSession = require("cookie-session");
+const proxyMiddleware = require("http-proxy-middleware");
+
 const qr = require("qrcode-terminal");
-
-const defaultOTPsecret = "QWERTZUIOPASDFGHJKL";
-
 const totp = require("totp-generator");
 const otblib = require("otplib");
 
-const path = require("path");
-
 const app = express();
-
 const db = require("./db")("temp", "db.json");
 
-const { PROXY_TARGET } = process.env;
+const { PROXY_TARGET, PORT } = process.env;
 if (!PROXY_TARGET) throw Error("PROXY_TARGET not set");
 
 console.log("Printing current QR Code:");
@@ -94,4 +90,4 @@ app.use(
   proxyMiddleware.createProxyMiddleware({ target: PROXY_TARGET }, {})
 );
 
-app.listen(3000);
+app.listen(PORT || 3000);
