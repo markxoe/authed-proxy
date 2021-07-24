@@ -42,10 +42,11 @@ app.get("/proxyauth/api/setup", async (req, res) => {
 
 app.post("/proxyauth/api/setup", async (req, res) => {
   if (!db.get("is-setup", false)) {
-    const newSecret = db.set("secret", otblib.authenticator.generateSecret());
+    const newSecret = otblib.authenticator.generateSecret();
+    db.set("secret", newSecret);
     db.set("is-setup", true);
     res.send({ secret: newSecret });
-  }
+  } else res.status(400).send({ err: "Already Setup" });
 });
 
 app.get("/proxyauth/*", (req, res) => {

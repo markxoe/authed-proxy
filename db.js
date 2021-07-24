@@ -6,7 +6,7 @@ const db = (filename) => {
   }
   const set = (name, data) => {
     const before = JSON.parse(fs.readFileSync(filename).toString());
-    fs.writeFileSync(filename, { ...before, [name]: data });
+    fs.writeFileSync(filename, JSON.stringify({ ...before, [name]: data }));
   };
 
   const get = (name, defaultValue = undefined) => {

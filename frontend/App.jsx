@@ -5,6 +5,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import Menu from "./components/Menu";
 import MainPage from "./pages";
 import { LanguageProvider } from "./state";
+import SetupPage from "./pages/Setup";
 
 const App = () => {
   return (
@@ -12,8 +13,11 @@ const App = () => {
       <Router>
         <Menu />
         <Switch>
-          <Route path="/">
+          <Route path="/proxyauth" exact>
             <MainPage />
+          </Route>
+          <Route path="/proxyauth/setup" exact>
+            <SetupPage />
           </Route>
         </Switch>
       </Router>
