@@ -24,8 +24,7 @@ const SetupPage = () => {
         }
       })
       .catch((reason) => {
-        console.log(reason);
-        setErrorMsg("E");
+        setErrorMsg("An unknown Error occured");
       });
   };
 
