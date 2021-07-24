@@ -7,15 +7,24 @@ import ReactQRCode from "react-qr-code";
 const SetupPage = () => {
   const { language } = React.useContext(LanguageContext);
   const [secret, setSecret] = React.useState("");
+  const [errorMsg, setErrorMsg] = React.useState("");
 
   const startSetup = () => {
     console.log("Post..");
-    axios.post("/proxyauth/api/setup", {}, {}).then((data) => {
-      if (data.status == 200) {
-        setSecret(data.data.secret);
-        console.log(data.data);
-      }
-    });
+    axios
+      .post("/proxyauth/api/setup", {}, { timeout: 500 })
+      .then((data) => {
+        if (data.status === 200 && data.data.status === "ok") {
+          setSecret(data.data.secret);
+          console.log(data.data);
+        } else {
+          setErrorMsg(`Error: ${data.data.err}` || "An unknown Error occured");
+        }
+      })
+      .catch((reason) => {
+        console.log(reason);
+        setErrorMsg("E");
+      });
   };
 
   return (
@@ -33,13 +42,21 @@ const SetupPage = () => {
                   </h1>
                   <p>{getLanguage(language).setup["long setup msg"]}</p>
                 </div>
-                <div className="notification is-danger is-light">
+                <div className="notification is-warning is-light">
                   {
                     getLanguage(language).setup[
                       "Warning! You are not going to see this QR Code again!"
                     ]
                   }
                 </div>
+
+                {errorMsg ? (
+                  <div className="notification is-danger is-light">
+                    {errorMsg}
+                  </div>
+                ) : (
+                  ""
+                )}
                 <button
                   className="button is-danger"
                   disabled={secret !== ""}
