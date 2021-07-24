@@ -3,6 +3,7 @@ import { getLanguage } from "../i18n";
 import { LanguageContext } from "../state";
 import axios from "axios";
 import ReactQRCode from "react-qr-code";
+import OTPForm from "../components/OTPForm";
 
 const SetupPage = () => {
   const { language } = React.useContext(LanguageContext);
@@ -16,6 +17,7 @@ const SetupPage = () => {
       .then((data) => {
         if (data.status === 200 && data.data.status === "ok") {
           setSecret(data.data.secret);
+          setErrorMsg("");
           console.log(data.data);
         } else {
           setErrorMsg(`Error: ${data.data.err}` || "An unknown Error occured");
@@ -87,7 +89,22 @@ const SetupPage = () => {
           ) : (
             ""
           )}
-          {/* TODO: Add OTP Input */}
+          {secret ? (
+            <div className="column is-narrow">
+              <div className="card">
+                <div className="card-content">
+                  <div className="content">
+                    <h2>
+                      {getLanguage(language)["please enter your otp code"]}
+                    </h2>
+                  </div>
+                  <OTPForm />
+                </div>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </section>
