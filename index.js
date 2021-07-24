@@ -30,6 +30,9 @@ app.use(
 );
 
 app.use("/proxyauth", express.static(path.join(__dirname, "frontend", "dist")));
+app.get("/proxyauth/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+});
 app.use(bodyparser.urlencoded());
 
 app.post("/proxyauth", (req, res, next) => {
